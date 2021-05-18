@@ -1,0 +1,18 @@
+{
+    "name": "mws/wp_utilities",
+    "description": "MakeWebSmart Wordpress Utilities",
+    "type": "project",
+    "license": "Creative Common",
+    "authors": [
+        {
+            "name": "Azraf C",
+            "email": "c.azraf@gmail.com"
+        }
+    ],
+    "config": {
+        "vendor-dir": "vendor"
+    },
+    "require": {
+        "hassankhan/config": "^2.2"
+    }
+}

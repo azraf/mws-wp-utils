@@ -1,0 +1,14 @@
+{
+    "module_settings": {
+        "copy_file": "on",
+        "favicon": "on",
+        "google_htmltag": "on",
+        "woocommerce": "on",
+        "phpinfo": "on",
+        "head_script": "off",
+        "footer_script": "off"
+    },
+    "set_favicon": "on",
+    "google_htmltag_option": "off",
+    "google_htmltag_content": ""
+}
