@@ -9,6 +9,8 @@
         "footer_script": "off"
     },
     "set_favicon": "on",
-    "google_htmltag_option": "off",
-    "google_htmltag_content": ""
+    "google_htmltag_option": "on",
+    "google_htmltag_content": "my-google-verification-string",
+    "google_analytics_option": "on",
+    "google_analytics_id": "G-S2P293PYQ1"
 }

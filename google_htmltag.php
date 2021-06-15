@@ -5,6 +5,28 @@ include_once __DIR__ .'/bootstrap.php';
 
 $mws_wputil_config = new MwsWpUtilConfig();
 $config_settings = $mws_wputil_config->config_values();
+// _d($config_settings,'$config_settings');
+
+if(isset($_POST['showcode']) || isset($_POST['google_analytics_id'])){
+  if ( current_user_can( 'manage_options' ) ) {
+    if ( check_admin_referer( 'mws_google_analytics' ) ) {
+      if(isset($_POST['showcode'])){
+        $mws_wputil_config->config['google_analytics_option'] = mws_sanitize_items($_POST['showcode']);
+      }
+      
+      if(isset($_POST['google_analytics_id'])){
+        $newID = $_POST['google_analytics_id'];
+        if(!empty($newID)){
+          $mws_wputil_config->config['google_analytics_id'] = mws_sanitize_items(trim($newID));
+        }
+      }
+      $mws_wputil_config->saveReload();
+      $config_settings = $mws_wputil_config->config_values();
+    }
+  } else {
+    echo "You dont have sufficient privilege to perform this action!";
+  } 
+}
 
 if(isset($_POST['showtag']) || isset($_POST['google_htmltag_content'])){
   if ( current_user_can( 'manage_options' ) ) {
@@ -31,6 +53,21 @@ if(isset($_POST['showtag']) || isset($_POST['google_htmltag_content'])){
 // $userSuspended = $member->disabled ? 'checked' : '';
 // $userActive = $member->disabled ? '' : 'checked';
 
+$showCodeOn = '';
+$showCodeOff = '';
+if($mws_wputil_config->config['google_analytics_option'] === 'on'){
+  $showCodeOn = ' checked';
+} else if($mws_wputil_config->config['google_analytics_option'] === 'off'){
+  $showCodeOff = ' checked';
+}
+
+$google_analytics_id 
+          = !empty($mws_wputil_config->config['google_analytics_id']) 
+          ? $mws_wputil_config->config['google_analytics_id'] 
+          : 'Tracking or Measurement ID';
+
+
+
 $showTagOn = '';
 $showTagOff = '';
 if($mws_wputil_config->config['google_htmltag_option'] === 'on'){
@@ -48,10 +85,60 @@ $google_htmltag_content
 ?>
 
 <div class="wrap">
+
+<div class="container">
+<table class="wp-list-table widefat striped">
+    <thead>
+      <tr>
+      <td colspan="2">Setup Google Analytics Tracking Code:</td>
+      </tr>
+    </thead>
+    <tbody>
+    <form method="post">
+      <tr>
+          <!-- <td><input type="text" value="AUTO_GENERATED" disabled></td> -->
+          <td width="25%">Google Analytics ID</td>
+          <td>
+            <input type="text" id="tagContent" name="google_analytics_id" class="set-width" placeholder="<?=$google_analytics_id;?>" />
+          </td>
+        </tr>
+        <tr>
+          <!-- <td><input type="text" value="AUTO_GENERATED" disabled></td> -->
+          <td width="25%">Setup Google Analytics</td>
+          <td>
+          <div>
+            <input type="radio" id="showtagOn" name="showcode" value="on"<?=$showCodeOn?> />
+            <label for="showtagOn">Enable</label>
+          </div>
+
+          <div>
+            <input type="radio" id="showtagOff" name="showcode" value="off"<?=$showCodeOff?> />
+            <label for="showtagOff">Disable</label>
+          </div>
+          </td>
+        </tr>
+        <?php wp_nonce_field( 'mws_google_analytics');?>
+        <tr>
+            <td width="25%">
+              <input id="reset_upload_form" class="" type="reset" value="Reset form" />
+            </td>
+            <td><button id="newsubmit" name="newsubmit" type="submit">Save</button></td>
+        </tr>
+        </form>
+    </tbody>  
+  </table>
+</div>
+<br />
+<br />
+<br />
+
+  <div class="container">
+
+  
   <table class="wp-list-table widefat striped">
     <thead>
       <tr>
-      <td>Google verification by HTML tag:</td><td></td>
+      <td colspan="2">Google SearchConsole (Webmaster) verification by HTML tag:</td>
       </tr>
     </thead>
     <tbody>
@@ -66,7 +153,7 @@ $google_htmltag_content
        min-width: 350px;
     }
     </style>
-    <p>Enabling this option will create the following line in your html head section:<br />
+    Enabling this option will create the following line in your html head section:<br />
         <?php
         $str = '<code>';
         $str .= htmlspecialchars('<meta name="google-site-verification" content="'.$google_htmltag_content.'">');
@@ -118,5 +205,10 @@ $google_htmltag_content
 
       </tbody>  
   </table>
+</div>
+
+
+  
+
   <br>
   </div>
