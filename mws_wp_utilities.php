@@ -4,7 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  * Plugin Name: MWS WP Utilities
  * Plugin URI: http://makewebsmart.com/wc-utils
  * Description: Some utilities for Wordpress and Woocommerce
- * Version: 1.0
+ * Version: 1.1
  * Author: Azraf
  * Author URI: http://azraf.me
  */

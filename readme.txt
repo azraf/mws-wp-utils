@@ -3,6 +3,7 @@ Contributors: azraf
 Tags: wordpress,wordpress-plugin,wordpress-utilities,favicon,copy,phpinfo
 Donate link: azraf.me
 Tested up to: 5.7.2
+Version: 1.1
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
