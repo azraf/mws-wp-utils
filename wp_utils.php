@@ -25,7 +25,7 @@ include_once __DIR__ .'/bootstrap.php';
         <td><a class="" href="<?=admin_url('admin.php?page=mws_wp_set_icon')?>">Favicon</a></td>
     </tr>
     <tr>
-        <td><a class="" href="<?=admin_url('admin.php?page=mws_wp_google_htmltag')?>">Google HTML Verify</a></td>
+        <td><a class="" href="<?=admin_url('admin.php?page=mws_wp_google_htmltag')?>">Google Accounts</a></td>
     </tr>
     <tr>
         <td><a class="" href="<?=admin_url('admin.php?page=mws_wp_wc_utils')?>">WooCommerce</a></td>

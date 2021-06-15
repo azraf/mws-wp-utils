@@ -57,7 +57,7 @@ function mws_wp_utilities_menu()
         'manage_options', 'mws_wp_copy_url', 'mws_wp_copy_url_callback');
     add_submenu_page('mws_wp_util', 'Set Favicon', 'Set Favicon',
         'manage_options', 'mws_wp_set_icon', 'mws_wp_set_icon_callback');
-    add_submenu_page('mws_wp_util', 'Google HTML Verify', 'Google HTML Verify',
+    add_submenu_page('mws_wp_util', 'Google HTML Verify', 'Google Accounts',
         'manage_options', 'mws_wp_google_htmltag', 'mws_wp_google_htmltag_callback');
     add_submenu_page('mws_wp_util', 'WooCommerce Utilities', 'WooCommerce Utilities',
         'manage_options', 'mws_wp_wc_utils', 'mws_wp_wc_utils_callback');
