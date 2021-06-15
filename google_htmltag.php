@@ -7,6 +7,7 @@ $mws_wputil_config = new MwsWpUtilConfig();
 $config_settings = $mws_wputil_config->config_values();
 // _d($config_settings,'$config_settings');
 
+// Google Analytics Tracking Code
 if(isset($_POST['showcode']) || isset($_POST['google_analytics_id'])){
   if ( current_user_can( 'manage_options' ) ) {
     if ( check_admin_referer( 'mws_google_analytics' ) ) {
@@ -28,6 +29,7 @@ if(isset($_POST['showcode']) || isset($_POST['google_analytics_id'])){
   } 
 }
 
+// Google Webmaster HTML meta tag
 if(isset($_POST['showtag']) || isset($_POST['google_htmltag_content'])){
   if ( current_user_can( 'manage_options' ) ) {
     if ( check_admin_referer( 'mws_google_htmltag' ) ) {
@@ -39,6 +41,28 @@ if(isset($_POST['showtag']) || isset($_POST['google_htmltag_content'])){
         $newContent = $_POST['google_htmltag_content'];
         if(!empty($newContent)){
           $mws_wputil_config->config['google_htmltag_content'] = mws_sanitize_items(trim($newContent));
+        }
+      }
+      $mws_wputil_config->saveReload();
+      $config_settings = $mws_wputil_config->config_values();
+    }
+  } else {
+    echo "You dont have sufficient privilege to perform this action!";
+  } 
+}
+
+// Adsense
+if(isset($_POST['showads']) || isset($_POST['google_adsense_id'])){
+  if ( current_user_can( 'manage_options' ) ) {
+    if ( check_admin_referer( 'mws_google_adsense' ) ) {
+      if(isset($_POST['showads'])){
+        $mws_wputil_config->config['google_adsense_option'] = mws_sanitize_items($_POST['showads']);
+      }
+      
+      if(isset($_POST['google_adsense_id'])){
+        $newAdsense = $_POST['google_adsense_id'];
+        if(!empty($newAdsense)){
+          $mws_wputil_config->config['google_adsense_id'] = mws_sanitize_items(trim($newAdsense));
         }
       }
       $mws_wputil_config->saveReload();
@@ -80,6 +104,20 @@ $google_htmltag_content
           = !empty($mws_wputil_config->config['google_htmltag_content']) 
           ? $mws_wputil_config->config['google_htmltag_content'] 
           : 'your-verification-string';
+
+
+$showAdOn = '';
+$showAdOff = '';
+if($mws_wputil_config->config['google_adsense_option'] === 'on'){
+  $showAdOn = ' checked';
+} else if($mws_wputil_config->config['google_adsense_option'] === 'off'){
+  $showAdOff = ' checked';
+}
+
+$google_adsense_id
+          = !empty($mws_wputil_config->config['google_adsense_id']) 
+          ? $mws_wputil_config->config['google_adsense_id'] 
+          : 'adsense-publisher-id';
 
 
 ?>
@@ -201,13 +239,92 @@ $google_htmltag_content
       <?php
     }
     ?>
-      </div>
+      </div> <!--  /trm-members -->
 
       </tbody>  
   </table>
-</div>
+</div> <!-- /Container -->
 
+<br />
+<br />
+<br />
 
+<!-- Adsense -->
+  <div class="container">
+
+  
+  <table class="wp-list-table widefat striped">
+    <thead>
+      <tr>
+      <td colspan="2">Google Adsense Header script tag:</td>
+      </tr>
+    </thead>
+    <tbody>
+    <style>
+    .trm-member form input[type=text]{
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        box-sizing: border-box;
+    }
+    .set-width {
+       min-width: 350px;
+    }
+    </style>
+    Enabling this option will create the following line in your html head section:<br />
+        <?php
+        $str = '<code>';
+        // $str .= htmlspecialchars('<meta name="google-site-verification" content="'.$google_htmltag_content.'">');
+        $str .= htmlspecialchars('<script data-ad-client="'.$google_adsense_id.'" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>');
+        $str .= '</code>';
+        echo $str;
+        ?>
+
+<div class="trm-member">
+  <?php
+    if ( current_user_can( 'manage_options' ) ) {
+    ?>
+      <form method="post">
+        <tr>
+          <!-- <td><input type="text" value="AUTO_GENERATED" disabled></td> -->
+          <td width="25%">Enable Adsense Header Code</td>
+          <td>
+          <div>
+            <input type="radio" id="showAdOn" name="showads" value="on"<?=$showAdOn?> />
+            <label for="showAdOn">Enable</label>
+          </div>
+
+          <div>
+            <input type="radio" id="showAdOff" name="showads" value="off"<?=$showAdOff?> />
+            <label for="showAdOff">Disable</label>
+          </div>
+          </td>
+        </tr>
+        
+        <tr>
+        <tr>
+          <!-- <td><input type="text" value="AUTO_GENERATED" disabled></td> -->
+          <td width="25%">Adsense Publisher ID</td>
+          <td>
+            <input type="text" id="adsenseId" name="google_adsense_id" class="set-width" placeholder="<?=$google_adsense_id;?>" />
+          </td>
+        </tr>
+        <?php wp_nonce_field( 'mws_google_adsense');?>
+        <tr>
+            <td width="25%">
+              <input id="reset_upload_form" class="" type="reset" value="Reset form" />
+            </td>
+            <td><button id="newsubmit" name="newsubmit" type="submit">Save</button></td>
+        </tr>
+      </form>
+      <?php
+    }
+    ?>
+      </div> <!--  /trm-members -->
+
+      </tbody>  
+  </table>
+</div> <!-- /Container -->
   
 
   <br>

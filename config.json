@@ -10,7 +10,9 @@
     },
     "set_favicon": "on",
     "google_htmltag_option": "off",
-    "google_htmltag_content": "",
+    "google_htmltag_content": "ga-sdfasdfasdfasdf",
     "google_analytics_option": "off",
-    "google_analytics_id": ""
+    "google_analytics_id": "",
+    "google_adsense_option": "on",
+    "google_adsense_id": "adse"
 }
