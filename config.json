@@ -8,11 +8,11 @@
         "head_script": "off",
         "footer_script": "off"
     },
-    "set_favicon": "on",
+    "set_favicon": "off",
     "google_htmltag_option": "off",
-    "google_htmltag_content": "ga-sdfasdfasdfasdf",
+    "google_htmltag_content": "",
     "google_analytics_option": "off",
     "google_analytics_id": "",
-    "google_adsense_option": "on",
-    "google_adsense_id": "adse"
+    "google_adsense_option": "off",
+    "google_adsense_id": ""
 }
