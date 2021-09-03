@@ -99,7 +99,7 @@ if(isset($_POST['url'])){
           <br />
 
           <input type="radio" id="saveChoice2" name="save" value="ai1backup">
-          <label for="saveChoice2">All in 1 Backup Directory</label>
+          <label for="saveChoice2"><strong><i>All in 1 Wp Migration</i></strong> Backup Directory</label>
           <br />
 
           <input type="radio" id="saveChoice3" name="save" value="custom" checked>
