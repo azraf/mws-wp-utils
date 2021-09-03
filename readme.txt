@@ -14,7 +14,9 @@ Add some frequently require functionalities. Admin can easily copy remote file, 
 Some tasks will be very easy to perform with this plugin.
 
  - You can easily copy remote file directly to your website without downloading and uploading.
+ - You can easily copy/save `All in 1 WP Migration` backup file from one server/website to another one.
  - You can easily add the html tags for favicon icons created from create-favicon.com
  - You can easily add HTML meta tag for Google Site Verification process.
  - You can easily delete/remove all your woocommerce products at once with single click button.
+ - You can easily redirect URL for users from Mobile devices.
  - You can check your server environments provided by the phpinfo() function from the "PHP info" menu Page.
