@@ -23,8 +23,13 @@ function mws_wp_utilities_init()
     include_once dirname(__FILE__) . '/Config.php';
     $json_config = mws_wputil_get_config();
 
-    // _d($json_config,'$json_a');
-    // _d('Tessting');
+    $mobile_redirect_url = trim($json_config['mobile_redirect_url']);
+    if (($json_config['mobile_redirect_option'] == 'on') && !empty($mobile_redirect_url)){
+        if ( wp_is_mobile() ) {
+            header ('Location: '.$mobile_redirect_url );
+            exit;
+        }
+    }
 
     if ( $json_config['set_favicon'] == 'on'){
       include_once dirname(__FILE__) . '/get_icon.php';
@@ -64,6 +69,8 @@ function mws_wp_utilities_menu()
         'manage_options', 'mws_wp_google_htmltag', 'mws_wp_google_htmltag_callback');
     add_submenu_page('mws_wp_util', 'WooCommerce Utilities', 'WooCommerce Utilities',
         'manage_options', 'mws_wp_wc_utils', 'mws_wp_wc_utils_callback');
+    add_submenu_page('mws_wp_util', 'Mobile Options', 'Mobile Options',
+        'manage_options', 'mws_wp_mobile_options', 'mws_wp_mobile_options_callback');
     add_submenu_page('mws_wp_util', 'PHP info', 'PHP info',
         'manage_options', 'mws_wp_phpinfo', 'mws_wp_phpinfo_callback');
 }
@@ -94,6 +101,11 @@ function mws_wp_google_htmltag_callback()
 function mws_wp_wc_utils_callback()
 {
   include_once dirname(__FILE__) . '/wc_utils.php';
+}
+
+function mws_wp_mobile_options_callback()
+{
+  include_once dirname(__FILE__) . '/mobile_options.php';
 }
 
 function mws_wp_phpinfo_callback()

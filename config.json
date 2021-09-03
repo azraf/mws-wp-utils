@@ -14,5 +14,7 @@
     "google_analytics_option": "off",
     "google_analytics_id": "",
     "google_adsense_option": "off",
-    "google_adsense_id": ""
+    "google_adsense_id": "",
+    "mobile_redirect_option": "off",
+    "mobile_redirect_url": ""
 }
