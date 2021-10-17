@@ -103,13 +103,15 @@ if(isset($_POST['delete_wc_product_tags'])){
     } // current_user_can method END
 }
 ?>
+<br />
+<br />
 <div>
 
     <div class="wc-action">
         <?php
         if ( current_user_can( 'manage_options' ) ) {
         ?>
-            <form method="post" action="">Delete image(s)  when delete product?:
+            <form method="post" action="">Delete woocommerce product image(s)  when delete product?:
                 <input type="radio" id="mwswp_del_product_image_on" name="mwswp_del_product_with_image" value="on"<?=$mwswpDelProductWithImageOn?> />
                     <label for="mwswp_del_product_image_on">On</label> &nbsp; | &nbsp;
                     <input type="radio" id="mwswp_del_product_image_off" name="mwswp_del_product_with_image" value="off"<?=$mwswpDelProductWithImageOff?> />
