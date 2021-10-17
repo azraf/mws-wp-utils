@@ -35,6 +35,10 @@ function mws_wp_utilities_init()
       include_once dirname(__FILE__) . '/get_icon.php';
     }
 
+    if ( $json_config['del_product_with_image'] == 'on'){
+      include_once dirname(__FILE__) . '/get_wc_del_product_img.php';
+    }
+
     if (( $json_config['google_htmltag_option'] == 'on') 
         || ( $json_config['google_analytics_option'] == 'on')
         || ( $json_config['google_adsense_option'] == 'on')
