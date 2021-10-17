@@ -1,5 +1,33 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+include_once __DIR__ .'/bootstrap.php';
+
+$mws_wputil_config = new MwsWpUtilConfig();
+$config_settings = $mws_wputil_config->config_values();
+if(isset($_POST['mwswp_del_product_with_image'])){
+    if ( current_user_can( 'manage_options' ) ) {
+        if ( check_admin_referer( 'mwswp_del_product_image' ) ) {
+            $mws_wputil_config->config['del_product_with_image'] = mws_sanitize_items($_POST['mwswp_del_product_with_image']);
+            $mws_wputil_config->saveReload();
+            $config_settings = $mws_wputil_config->config_values();
+        }
+} else {
+  echo "You dont have sufficient privilege to perform this action!";
+} // current_user_can method END
+}
+
+// _d($config_settings,'$config_settings');
+
+$mwswpDelProductWithImageOn = '';
+$mwswpDelProductWithImageOff = '';
+if($mws_wputil_config->config['del_product_with_image'] === 'on'){
+  $mwswpDelProductWithImageOn = ' checked';
+} else if($mws_wputil_config->config['del_product_with_image'] === 'off'){
+  $mwswpDelProductWithImageOff = ' checked';
+}
+
+
+
 
 if(isset($_POST['delete_wc_products'])){
     if ( current_user_can( 'manage_options' ) ) {
@@ -76,6 +104,27 @@ if(isset($_POST['delete_wc_product_tags'])){
 }
 ?>
 <div>
+
+    <div class="wc-action">
+        <?php
+        if ( current_user_can( 'manage_options' ) ) {
+        ?>
+            <form method="post" action="">Delete image(s)  when delete product?:
+                <input type="radio" id="mwswp_del_product_image_on" name="mwswp_del_product_with_image" value="on"<?=$mwswpDelProductWithImageOn?> />
+                    <label for="mwswp_del_product_image_on">On</label> &nbsp; | &nbsp;
+                    <input type="radio" id="mwswp_del_product_image_off" name="mwswp_del_product_with_image" value="off"<?=$mwswpDelProductWithImageOff?> />
+                    <label for="mwswp_del_product_image_off">Off</label><br>
+                    <?php wp_nonce_field( 'mwswp_del_product_image');?>
+                <?php  submit_button(); ?>
+    <!--            <p>-->
+    <!--                <input type="submit" name="submit" id="submit" class="button button-primary" value="Delete Products">-->
+    <!--            </p>-->
+            </form>
+            <?php
+        }
+        ?>
+    </div>
+
     <h2>Tasks:</h2>
     <div class="wc-action">
     <?php

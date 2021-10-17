@@ -7,7 +7,6 @@ $mws_wputil_config = new MwsWpUtilConfig();
 $config_settings = $mws_wputil_config->config_values();
 // _d($config_settings,'$config_settings');
 
-// Google Analytics Tracking Code
 if(isset($_POST['mobile_redirect_option']) || isset($_POST['mobile_redirect_url'])){
   if ( current_user_can( 'manage_options' ) ) {
     if ( check_admin_referer( 'mwswp_mobile_options' ) ) {

@@ -9,6 +9,7 @@
         "footer_script": "off"
     },
     "set_favicon": "off",
+    "del_product_with_image": "off",
     "google_htmltag_option": "off",
     "google_htmltag_content": "",
     "google_analytics_option": "off",
