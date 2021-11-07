@@ -1,8 +1,8 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-if(!function_exists('mws_wp_head_set_icon')){
-function mws_wp_head_set_icon(){ ?>
+if(!function_exists('mwswp_head_set_icon')){
+function mwswp_head_set_icon(){ ?>
     <!-- Custom Favicon my MWS WP Utils / create-favicon.com -->
     <link rel="shortcut icon" type="image/x-icon" href="<?php echo home_url( 'favicon.ico', 'relative' );?>" />
     <link rel="apple-touch-icon" sizes="180x180" href="<?php echo home_url( 'apple-touch-icon.png', 'relative' );?>" />
@@ -13,6 +13,6 @@ function mws_wp_head_set_icon(){ ?>
     <link rel="manifest" href="<?php echo home_url( 'site.webmanifest', 'relative' );?>" />
 <?php }
 }
-add_action('wp_head','mws_wp_head_set_icon');
+add_action('wp_head','mwswp_head_set_icon');
 
 ?>

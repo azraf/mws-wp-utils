@@ -59,6 +59,11 @@ add_action( 'before_delete_post', function( $id ) {
 
 
 
+/**
+ * 
+ * ::: Other methods :::
+ * 
+ */
 
 // // Automatically Delete Woocommerce Images After Deleting a Product
 // add_action( 'before_delete_post', 'delete_product_images', 10, 1 );

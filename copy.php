@@ -1,8 +1,8 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-if(!function_exists('mws_remoteCopy')){
-  function mws_remoteCopy($file,$newfile){
+if(!function_exists('mwswp_remoteCopy')){
+  function mwswp_remoteCopy($file,$newfile){
     $context = stream_context_create(array(
       'http' => array(
           'header' => array('User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; rv:2.2) Gecko/20110201'),
@@ -16,18 +16,18 @@ if(!function_exists('mws_remoteCopy')){
   }
 }
 
-$mws_util_plugin_url = plugin_dir_url( __FILE__ ) ;
+$mwswp_util_plugin_url = plugin_dir_url( __FILE__ ) ;
 
 if(isset($_POST['url'])){
   if ( current_user_can( 'manage_options' ) ) {
-    if ( check_admin_referer( 'mws_remote_copy' ) ) {
+    if ( check_admin_referer( 'mwswp_remote_copy' ) ) {
     if(!empty($_POST['save_name'])){
-      $fileName = mws_sanitize_items(trim($_POST['save_name']));
+      $fileName = mwswp_sanitize_items(trim($_POST['save_name']));
     } else {
-      $fileName = mws_sanitize_items(basename($_POST['url'])); 
+      $fileName = mwswp_sanitize_items(basename($_POST['url'])); 
     }
 
-    $url = mws_sanitize_items(trim($_POST['url']));
+    $url = mwswp_sanitize_items(trim($_POST['url']));
 
     if(!empty($_POST['save'])){
       
@@ -69,7 +69,7 @@ if(isset($_POST['url'])){
       }
       $savepath = $saveDir . $fileName;
 
-      mws_remoteCopy($url,$savepath);
+      mwswp_remoteCopy($url,$savepath);
     }
     }
   } else {
@@ -108,7 +108,7 @@ if(isset($_POST['url'])){
             <br />
   <div>
       <span class="decription">If Plugin directory selected, download location will be: <?php echo __DIR__ . '/downloads/'; ?> </span><br />
-      <span class="decription">and that directory URL: <a href="<?php echo $mws_util_plugin_url . 'downloads/';?>"><?php echo $mws_util_plugin_url . 'downloads/';?></a>.</span>
+      <span class="decription">and that directory URL: <a href="<?php echo $mwswp_util_plugin_url . 'downloads/';?>"><?php echo $mwswp_util_plugin_url . 'downloads/';?></a>.</span>
   </div>
           <br />
           <br />
@@ -118,7 +118,7 @@ if(isset($_POST['url'])){
           </div>
           <br />
         </div>
-        <?php wp_nonce_field( 'mws_remote_copy');?>
+        <?php wp_nonce_field( 'mwswp_remote_copy');?>
         <?php  submit_button(); ?>
     </form>
     <?php

@@ -3,14 +3,14 @@
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 include_once __DIR__ .'/bootstrap.php';
 
-$mws_wputil_config = new MwsWpUtilConfig();
-$config_settings = $mws_wputil_config->config_values();
-if(isset($_POST['mws_wp_util_favicon'])){
+$mwswputil_config = new MwsWpUtilConfig();
+$config_settings = $mwswputil_config->config_values();
+if(isset($_POST['mwswp_util_favicon'])){
     if ( current_user_can( 'manage_options' ) ) {
-        if ( check_admin_referer( 'mws_set_favicon' ) ) {
-            $mws_wputil_config->config['set_favicon'] = mws_sanitize_items($_POST['mws_wp_util_favicon']);
-            $mws_wputil_config->saveReload();
-            $config_settings = $mws_wputil_config->config_values();
+        if ( check_admin_referer( 'mwswp_set_favicon' ) ) {
+            $mwswputil_config->config['set_favicon'] = mwswp_sanitize_items($_POST['mwswp_util_favicon']);
+            $mwswputil_config->saveReload();
+            $config_settings = $mwswputil_config->config_values();
         }
 } else {
   echo "You dont have sufficient privilege to perform this action!";
@@ -21,9 +21,9 @@ if(isset($_POST['mws_wp_util_favicon'])){
 
 $showFavOn = '';
 $showFavOff = '';
-if($mws_wputil_config->config['set_favicon'] === 'on'){
+if($mwswputil_config->config['set_favicon'] === 'on'){
   $showFavOn = ' checked';
-} else if($mws_wputil_config->config['set_favicon'] === 'off'){
+} else if($mwswputil_config->config['set_favicon'] === 'off'){
   $showFavOff = ' checked';
 }
 
@@ -52,11 +52,11 @@ if($mws_wputil_config->config['set_favicon'] === 'on'){
     if ( current_user_can( 'manage_options' ) ) {
     ?>
         <form method="post" action="">Enable Custom Favicon link:
-            <input type="radio" id="mws_wp_util_icon_on" name="mws_wp_util_favicon" value="on"<?=$showFavOn?> />
-                <label for="mws_wp_util_icon_on">On</label> &nbsp; | &nbsp;
-                <input type="radio" id="mws_wp_util_icon_off" name="mws_wp_util_favicon" value="off"<?=$showFavOff?> />
-                <label for="mws_wp_util_icon_off">Off</label><br>
-                <?php wp_nonce_field( 'mws_set_favicon');?>
+            <input type="radio" id="mwswp_util_icon_on" name="mwswp_util_favicon" value="on"<?=$showFavOn?> />
+                <label for="mwswp_util_icon_on">On</label> &nbsp; | &nbsp;
+                <input type="radio" id="mwswp_util_icon_off" name="mwswp_util_favicon" value="off"<?=$showFavOff?> />
+                <label for="mwswp_util_icon_off">Off</label><br>
+                <?php wp_nonce_field( 'mwswp_set_favicon');?>
             <?php  submit_button(); ?>
 <!--            <p>-->
 <!--                <input type="submit" name="submit" id="submit" class="button button-primary" value="Delete Products">-->

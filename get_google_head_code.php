@@ -1,10 +1,10 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-function mws_wphead_set_googleheadcode(){ 
+function mwswphead_set_googleheadcode(){ 
 
   include_once dirname(__FILE__) . '/Config.php';
-  $json_config = mws_wputil_get_config();
+  $json_config = mwswputil_get_config();
 
   if ( $json_config['google_htmltag_option'] == 'on'){
     ?>
@@ -34,6 +34,6 @@ function mws_wphead_set_googleheadcode(){
 
 }
 
-add_action('wp_head','mws_wphead_set_googleheadcode');
+add_action('wp_head','mwswphead_set_googleheadcode');
 
 ?>

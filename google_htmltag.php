@@ -3,26 +3,26 @@
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 include_once __DIR__ .'/bootstrap.php';
 
-$mws_wputil_config = new MwsWpUtilConfig();
-$config_settings = $mws_wputil_config->config_values();
+$mwswputil_config = new MwsWpUtilConfig();
+$config_settings = $mwswputil_config->config_values();
 // _d($config_settings,'$config_settings');
 
 // Google Analytics Tracking Code
 if(isset($_POST['showcode']) || isset($_POST['google_analytics_id'])){
   if ( current_user_can( 'manage_options' ) ) {
-    if ( check_admin_referer( 'mws_google_analytics' ) ) {
+    if ( check_admin_referer( 'mwswp_google_analytics' ) ) {
       if(isset($_POST['showcode'])){
-        $mws_wputil_config->config['google_analytics_option'] = mws_sanitize_items($_POST['showcode']);
+        $mwswputil_config->config['google_analytics_option'] = mwswp_sanitize_items($_POST['showcode']);
       }
       
       if(isset($_POST['google_analytics_id'])){
         $newID = $_POST['google_analytics_id'];
         if(!empty($newID)){
-          $mws_wputil_config->config['google_analytics_id'] = mws_sanitize_items(trim($newID));
+          $mwswputil_config->config['google_analytics_id'] = mwswp_sanitize_items(trim($newID));
         }
       }
-      $mws_wputil_config->saveReload();
-      $config_settings = $mws_wputil_config->config_values();
+      $mwswputil_config->saveReload();
+      $config_settings = $mwswputil_config->config_values();
     }
   } else {
     echo "You dont have sufficient privilege to perform this action!";
@@ -32,19 +32,19 @@ if(isset($_POST['showcode']) || isset($_POST['google_analytics_id'])){
 // Google Webmaster HTML meta tag
 if(isset($_POST['showtag']) || isset($_POST['google_htmltag_content'])){
   if ( current_user_can( 'manage_options' ) ) {
-    if ( check_admin_referer( 'mws_google_htmltag' ) ) {
+    if ( check_admin_referer( 'mwswp_google_htmltag' ) ) {
       if(isset($_POST['showtag'])){
-        $mws_wputil_config->config['google_htmltag_option'] = mws_sanitize_items($_POST['showtag']);
+        $mwswputil_config->config['google_htmltag_option'] = mwswp_sanitize_items($_POST['showtag']);
       }
       
       if(isset($_POST['google_htmltag_content'])){
         $newContent = $_POST['google_htmltag_content'];
         if(!empty($newContent)){
-          $mws_wputil_config->config['google_htmltag_content'] = mws_sanitize_items(trim($newContent));
+          $mwswputil_config->config['google_htmltag_content'] = mwswp_sanitize_items(trim($newContent));
         }
       }
-      $mws_wputil_config->saveReload();
-      $config_settings = $mws_wputil_config->config_values();
+      $mwswputil_config->saveReload();
+      $config_settings = $mwswputil_config->config_values();
     }
   } else {
     echo "You dont have sufficient privilege to perform this action!";
@@ -54,19 +54,19 @@ if(isset($_POST['showtag']) || isset($_POST['google_htmltag_content'])){
 // Adsense
 if(isset($_POST['showads']) || isset($_POST['google_adsense_id'])){
   if ( current_user_can( 'manage_options' ) ) {
-    if ( check_admin_referer( 'mws_google_adsense' ) ) {
+    if ( check_admin_referer( 'mwswp_google_adsense' ) ) {
       if(isset($_POST['showads'])){
-        $mws_wputil_config->config['google_adsense_option'] = mws_sanitize_items($_POST['showads']);
+        $mwswputil_config->config['google_adsense_option'] = mwswp_sanitize_items($_POST['showads']);
       }
       
       if(isset($_POST['google_adsense_id'])){
         $newAdsense = $_POST['google_adsense_id'];
         if(!empty($newAdsense)){
-          $mws_wputil_config->config['google_adsense_id'] = mws_sanitize_items(trim($newAdsense));
+          $mwswputil_config->config['google_adsense_id'] = mwswp_sanitize_items(trim($newAdsense));
         }
       }
-      $mws_wputil_config->saveReload();
-      $config_settings = $mws_wputil_config->config_values();
+      $mwswputil_config->saveReload();
+      $config_settings = $mwswputil_config->config_values();
     }
   } else {
     echo "You dont have sufficient privilege to perform this action!";
@@ -79,44 +79,44 @@ if(isset($_POST['showads']) || isset($_POST['google_adsense_id'])){
 
 $showCodeOn = '';
 $showCodeOff = '';
-if($mws_wputil_config->config['google_analytics_option'] === 'on'){
+if($mwswputil_config->config['google_analytics_option'] === 'on'){
   $showCodeOn = ' checked';
-} else if($mws_wputil_config->config['google_analytics_option'] === 'off'){
+} else if($mwswputil_config->config['google_analytics_option'] === 'off'){
   $showCodeOff = ' checked';
 }
 
 $google_analytics_id 
-          = !empty($mws_wputil_config->config['google_analytics_id']) 
-          ? $mws_wputil_config->config['google_analytics_id'] 
+          = !empty($mwswputil_config->config['google_analytics_id']) 
+          ? $mwswputil_config->config['google_analytics_id'] 
           : 'Tracking or Measurement ID';
 
 
 
 $showTagOn = '';
 $showTagOff = '';
-if($mws_wputil_config->config['google_htmltag_option'] === 'on'){
+if($mwswputil_config->config['google_htmltag_option'] === 'on'){
   $showTagOn = ' checked';
-} else if($mws_wputil_config->config['google_htmltag_option'] === 'off'){
+} else if($mwswputil_config->config['google_htmltag_option'] === 'off'){
   $showTagOff = ' checked';
 }
 
 $google_htmltag_content 
-          = !empty($mws_wputil_config->config['google_htmltag_content']) 
-          ? $mws_wputil_config->config['google_htmltag_content'] 
+          = !empty($mwswputil_config->config['google_htmltag_content']) 
+          ? $mwswputil_config->config['google_htmltag_content'] 
           : 'your-verification-string';
 
 
 $showAdOn = '';
 $showAdOff = '';
-if($mws_wputil_config->config['google_adsense_option'] === 'on'){
+if($mwswputil_config->config['google_adsense_option'] === 'on'){
   $showAdOn = ' checked';
-} else if($mws_wputil_config->config['google_adsense_option'] === 'off'){
+} else if($mwswputil_config->config['google_adsense_option'] === 'off'){
   $showAdOff = ' checked';
 }
 
 $google_adsense_id
-          = !empty($mws_wputil_config->config['google_adsense_id']) 
-          ? $mws_wputil_config->config['google_adsense_id'] 
+          = !empty($mwswputil_config->config['google_adsense_id']) 
+          ? $mwswputil_config->config['google_adsense_id'] 
           : 'adsense-publisher-id';
 
 
@@ -155,7 +155,7 @@ $google_adsense_id
           </div>
           </td>
         </tr>
-        <?php wp_nonce_field( 'mws_google_analytics');?>
+        <?php wp_nonce_field( 'mwswp_google_analytics');?>
         <tr>
             <td width="25%">
               <input id="reset_upload_form" class="" type="reset" value="Reset form" />
@@ -228,7 +228,7 @@ $google_adsense_id
             <input type="text" id="tagContent" name="google_htmltag_content" class="set-width" placeholder="<?=$google_htmltag_content;?>" />
           </td>
         </tr>
-        <?php wp_nonce_field( 'mws_google_htmltag');?>
+        <?php wp_nonce_field( 'mwswp_google_htmltag');?>
         <tr>
             <td width="25%">
               <input id="reset_upload_form" class="" type="reset" value="Reset form" />
@@ -309,7 +309,7 @@ $google_adsense_id
             <input type="text" id="adsenseId" name="google_adsense_id" class="set-width" placeholder="<?=$google_adsense_id;?>" />
           </td>
         </tr>
-        <?php wp_nonce_field( 'mws_google_adsense');?>
+        <?php wp_nonce_field( 'mwswp_google_adsense');?>
         <tr>
             <td width="25%">
               <input id="reset_upload_form" class="" type="reset" value="Reset form" />

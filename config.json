@@ -16,6 +16,10 @@
     "google_analytics_id": "",
     "google_adsense_option": "off",
     "google_adsense_id": "",
+    "mobile_theme_switch": "off",
+    "mobile_theme_select": "twentysixteen",
     "mobile_redirect_option": "off",
-    "mobile_redirect_url": ""
+    "mobile_redirect_url": "",
+    "fb_verifymeta_option": "off",
+    "fb_verifymeta_content": ""
 }

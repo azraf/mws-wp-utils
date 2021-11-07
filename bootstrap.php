@@ -58,8 +58,8 @@ class MwsWpUtilConfig {
     /**
      * to set config at default values
      * initialize the config with false param
-     * $mws_wputil_config = new MwsWpUtilConfig(false);
-     * $mws_wputil_config->set_default_values();
+     * $mwswputil_config = new MwsWpUtilConfig(false);
+     * $mwswputil_config->set_default_values();
      * 
      */
     public function set_default_values(){
